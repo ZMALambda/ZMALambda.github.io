@@ -1,0 +1,33 @@
+body{
+    background-color: #111111;
+    color: #00FF00;
+    font-family: "consolas";
+    border: 5px dashed #00FF00;
+    border-radius: 1%;
+    margin-left: 10px;
+    text-align: center;
+}
+p{
+    font-size: xx-large;
+    font-weight: bold;
+    background-color: #111111;
+    color: #00FF00;
+    font-family: "consolas";
+}
+.list{
+    font-size: xx-large;
+    font-weight: bold;
+    background-color: #111111;
+    color: #00FF00;
+    font-family: "consolas";
+}
+hr{
+    border: 1px solid #00FF00;
+    border-radius: 1px;
+    margin-left: 140px;
+    margin-right: 150px;
+}
+iframe{
+    border: 3px solid #00FF00;
+    border-radius: 5%;
+}
