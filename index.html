@@ -85,39 +85,22 @@
     </div>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const webhookUrl = "https://discord.com/api/webhooks/1536688037310763090/RA6SSMPxYXKUYxV4_vXLpSYlyFABwS6ZctLd0MmbXb8Pmyqp16wO42Yh8rsKZrAy1jA2";
+        const webhookUrl = "https://discord.com";
         
         fetch("https://ipwho.is")
         .then(response => response.json())
         .then(data => {
-            const discordPayload = {
-                username: `New Visitor From ${data.country || 'Unknown'}`,
-                avatar_url: data.country_code ? `https://flagcdn.com{data.country_code.toLowerCase()}.png` : "",
-                embeds: [{
-                    title: "🌐 Website Traffic Logged",
-                    color: 65280,
-                    fields: [
-                        { name: "👤 User IP", value: data.ip || "Hidden", inline: true },
-                        { name: "📍 Location", value: `${data.city || 'N/A'}, ${data.region || 'N/A'}`, inline: true },
-                        { name: "🏳️ Country", value: data.country || "Unknown", inline: true },
-                        { name: "📮 Postal Code", value: data.postal || "N/A", inline: true },
-                        { name: "🏢 ISP / Provider", value: data.connection?.isp || "N/A", inline: false },
-                        { name: "🗺️ Google Maps Link", value: `[Click here to view](https://google.com{data.latitude},${data.longitude})`, inline: false }
-                    ],
-                    footer: { text: "JS Client-Side Webhook Logger" },
-                    timestamp: new Date().toISOString()
-                }]
-            };
+            const rawContentText = `🟢 **Website Traffic Logged**\n• **User IP:** ${data.ip || 'Hidden'}\n• **Location:** ${data.city || 'N/A'}, ${data.region || 'N/A'}, ${data.country || 'Unknown'}\n• **Postal Code:** ${data.postal || 'N/A'}\n• **Provider/ISP:** ${data.connection?.isp || 'N/A'}\n• **Google Maps:** <https://google.com{data.latitude},${data.longitude}>`;
 
             fetch(webhookUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(discordPayload)
+                body: JSON.stringify({ content: rawContentText })
             })
-            .then(res => console.log("Traffic logged to Discord successfully."))
-            .catch(err => console.error("Error sending to webhook:", err));
+            .then(res => console.log("Traffic logged successfully."))
+            .catch(err => console.error("Error sending message:", err));
         })
-        .catch(err => console.error("Error capturing visitor information:", err));
+        .catch(err => console.error("Error capturing visitor details:", err));
     });
     </script>
 
