@@ -10,17 +10,27 @@ body{
     margin-left: 10px;
     text-align: center;
 }
-p{
+button, .inputbox{
+    background-color: #000000;
+    border: 3px solid #00FF00;
+    border-radius: 5%;
+    color: #00FF00;
+    padding: 16px 32px;
+    text-decoration: none;
     font-size: xx-large;
     font-weight: bold;
     color: #00FF00;
     font-family: "consolas";
+    font-size: 2em;
+    margin: 4px 2px;
+    cursor: pointer;
 }
-.list{
+p, .list, ::placeholder{
     font-size: xx-large;
     font-weight: bold;
     color: #00FF00;
     font-family: "consolas";
+    text-align: center;
 }
 hr{
     border: 1px solid #00FF00;
@@ -29,16 +39,16 @@ hr{
     margin-right: 150px;
 }
 body::-webkit-scrollbar{
-  background: #000000;
-  width: 12px;
+    background: #000000;
+    width: 12px;
 }
 body::-webkit-scrollbar-track{
-  background: #000000;
+        background: #000000;
 }
 body::-webkit-scrollbar-thumb,body::-webkit-scrollbar-button{
-  background-color: #00FF00;
-  border-radius: 20px;
-  border: 3px solid #000000;
+    background-color: #00FF00;
+    border-radius: 20px;
+    border: 3px solid #000000;
 }
 iframe{
     border: 3px solid #00FF00;
