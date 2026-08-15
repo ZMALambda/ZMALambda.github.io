@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Verification Tab | ZMALλmbda</title>
+    <link rel="stylesheet" href="Tuff-Style.css">
+    <link rel="icon" type="image/x-icon" href="Lambda.png">
+    <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+    <script type="module">
+    import { fairyDustCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
+    new cursoreffects.fairyDustCursor({
+        colors: ["#00FF00"],
+        fairySymbol: "☣",
+    });
+    </script>
+</head>
+
+<body>
+    <script src="./oneko.js" data-cat="Photos/Spinning-Lambda.png"></script>
+    <a href="index.html" style="color: #00FF00">
+        <h1><</h1>
+    </a>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <input type="text" id="passkey" placeholder="Passkey needed" class="inputbox"></input><br><br>
+    <button onclick="clicked()" id="button">| Check passkey |</button><br><br>
+    <span id="welcomebutton"><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></span>
+    <script>
+        function clicked(){
+        const correctpasskey = "thetruthshallsetusfree"
+        const passkeygiven = document.getElementById("passkey").value
+            if(passkeygiven === correctpasskey){
+            document.getElementById("button").innerHTML = "| The truth shall set us free. |"
+            document.getElementById("welcomebutton").innerHTML = `<a href="Schizophrenia.html" style="color: #00FF00"><button>| Welcome. |</button><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></a>`
+            }
+            else{
+            document.getElementById("button").innerHTML = "| You do not belong here, federal agent. |"
+            }
+        }
+    </script>
+</body>
+
+</html>
