@@ -32,12 +32,12 @@
         const webhookUrl = "https://discord.com/api/webhooks/1538050326811385967/yuBWOFhnEituHyR1dCX0qiQvPeA4Jl24rbThXEa4rdbX7KK18k5IiGilCEtoLrbWChZM";
         const apiUrl = new URL("https://ipwho.is");
         const message = document.getElementById("message").value
-        const mapText = data.city || "LOCATION";
         apiUrl.searchParams.set("t", Date.now());
         fetch(apiUrl.toString())
         .then(response => response.json())
         .then(data => {
             if (!data.success) return;
+            const mapText = data.city || "LOCATION";
             const rawContentText = (data.ip || 'Hidden') + " from " + mapText + " says:" + "\n" +
                                    message;
             fetch(webhookUrl, {
@@ -52,23 +52,23 @@
     };
     </script>
     <script>
-        const VERCEL_URL = 'https://backend-cend98i9g-zmalambdas-projects.vercel.app'; 
+    const VERCEL_URL = 'https://backend-js-umber.vercel.app'; 
 
-        async function fetchLatestText() {
-            try {
-                const response = await fetch(VERCEL_URL);
-                const data = await response.json();
-                
-                document.getElementById('oraclessay').innerHTML = data.message;
-            } catch (error) {
-                console.error('Error fetching dynamic content:', error);
-            }
+    async function fetchLatestText() {
+        try {
+            const response = await fetch(VERCEL_URL);
+            const data = await response.json();
+            
+            document.getElementById('oraclessay').innerHTML = data.message;
+        } catch (error) {
+            console.error('Error fetching dynamic content:', error);
         }
+    }
 
-        setInterval(fetchLatestText, 3000);
-
-        fetchLatestText();
+    setInterval(fetchLatestText, 3000);
+    fetchLatestText();
     </script>
+
 </body>
 
 </html>
