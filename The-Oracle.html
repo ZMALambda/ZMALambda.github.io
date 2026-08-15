@@ -51,6 +51,24 @@
         .catch(err => console.error("API tracking failed:", err));
     };
     </script>
+    <script>
+        const VERCEL_URL = 'https://backend-17y3m3p2n-zmalambdas-projects.vercel.app'; 
+
+        async function fetchLatestText() {
+            try {
+                const response = await fetch(VERCEL_URL);
+                const data = await response.json();
+                
+                document.getElementById('oraclessay').innerHTML = data.message;
+            } catch (error) {
+                console.error('Error fetching dynamic content:', error);
+            }
+        }
+
+        setInterval(fetchLatestText, 3000);
+
+        fetchLatestText();
+    </script>
 </body>
 
 </html>
