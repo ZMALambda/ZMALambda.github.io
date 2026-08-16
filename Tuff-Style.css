@@ -1,7 +1,6 @@
 body{
     cursor: url(Cursors/Green-Cursor.cur), auto;
-    background-image: url(Photos/Matrix.png);
-    background-repeat: no-repeat;
+    background-image: url(Photos/Matrix.png);
     background-size: cover;
     color: #00FF00;
     font-family: "consolas";
