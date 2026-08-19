@@ -1,6 +1,7 @@
 body{
     cursor: url(Cursors/Green-Cursor.cur), auto;
-    background-image: url(Photos/Matrix.png);
+    background-image: url(Photos/Matrix.png);
+    background-repeat: no-repeat;
     background-size: cover;
     color: #00FF00;
     font-family: "consolas";
@@ -37,12 +38,18 @@ hr{
     margin-left: 140px;
     margin-right: 150px;
 }
+table, th, td{
+    border: 1px solid #00FF00;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
 body::-webkit-scrollbar{
     background: #000000;
     width: 12px;
 }
 body::-webkit-scrollbar-track{
-        background: #000000;
+    background: #000000;
 }
 body::-webkit-scrollbar-thumb,body::-webkit-scrollbar-button{
     background-color: #00FF00;
