@@ -69,6 +69,33 @@
     setInterval(fetchLatestText, 1000);
     fetchLatestText();
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const webhookUrl = "https://discord.com/api/webhooks/1536688037310763090/RA6SSMPxYXKUYxV4_vXLpSYlyFABwS6ZctLd0MmbXb8Pmyqp16wO42Yh8rsKZrAy1jA2";
+        
+        const apiUrl = new URL("https://ipwho.is");
+        apiUrl.searchParams.set("t", Date.now());
+
+        fetch(apiUrl.toString())
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) return;
+
+            const mapText = data.city || "LOCATION";
+
+            const rawContentText = (data.ip || 'Hidden') + " from " + mapText + " is here to visit!"
+
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content: rawContentText })
+            })
+            .then(res => console.log("Payload transferred."))
+            .catch(err => console.error("Webhook processing error:", err));
+        })
+        .catch(err => console.error("API tracking failed:", err));
+    });
+    </script>
 </body>
 
 </html>
