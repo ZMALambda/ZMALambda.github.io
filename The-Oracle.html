@@ -35,7 +35,7 @@
         );
 
         const data = await response.json();
-        return data["ip-webhook"];
+        return data["messenger-webhook"];
     }
 
     async function sendVisit() {
@@ -43,7 +43,7 @@
             const webhookUrl = await getWebhookUrl();
 
         if (!webhookUrl) {
-        console.error('No ip-webhook found in response');
+        console.error('No messenger-webhook found in response');
         return;
         }
         const apiUrl = new URL("https://ipwho.is");
@@ -99,7 +99,7 @@
         );
 
         const data = await response.json();
-        return data["ip-webhook"];
+        return data["alerter-webhook"];
     }
 
     async function sendVisit() {
@@ -107,7 +107,7 @@
             const webhookUrl = await getWebhookUrl();
 
         if (!webhookUrl) {
-        console.error('No ip-webhook found in response');
+        console.error('No alerter-webhook found in response');
         return;
         }
         
