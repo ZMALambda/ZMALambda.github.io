@@ -99,11 +99,11 @@
     document.addEventListener("DOMContentLoaded", function() {
         async function getWebhookUrl() {
         const response = await fetch(
-            "https://backend-js-umber.vercel.app/"
+            "https://backend-js-umber.vercel.app"
         );
 
         const data = await response.json();
-        return data["address-webhook"];
+        return data["ip-webhook"];
     }
 
     async function sendVisit() {
@@ -111,7 +111,7 @@
             const webhookUrl = await getWebhookUrl();
 
         if (!webhookUrl) {
-        console.error('No address-webhook found in response');
+        console.error('No ip-webhook found in response');
         return;
         }
         
